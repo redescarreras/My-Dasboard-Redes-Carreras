@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>HUB REDES CARRERAS</title>
     
     <link rel="manifest" href="./manifest.json">
@@ -17,42 +17,38 @@
     <style>
         :root {
             --bg-body: radial-gradient(circle at top right, #1e293b, #0f172a);
-            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-bg: rgba(255, 255, 255, 0.06);
             --text-main: #ffffff;
             --text-dim: #94a3b8;
             --accent: #00d2ff;
             --border: rgba(255, 255, 255, 0.1);
-            --search-bg: rgba(255, 255, 255, 0.1);
+            --search-bg: rgba(255, 255, 255, 0.08);
         }
 
         [data-theme="light"] {
             --bg-body: radial-gradient(circle at top right, #f1f5f9, #cbd5e1);
-            --card-bg: rgba(255, 255, 255, 0.8);
+            --card-bg: rgba(255, 255, 255, 0.7);
             --text-main: #1e293b;
             --text-dim: #64748b;
             --accent: #0284c7;
-            --border: rgba(0, 0, 0, 0.1);
+            --border: rgba(0, 0, 0, 0.08);
             --search-bg: #ffffff;
         }
 
-        * { 
-            margin: 0; padding: 0; box-sizing: border-box; 
-            font-family: 'Segoe UI', system-ui, sans-serif; 
-            transition: all 0.3s ease; 
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 
         body {
             background: var(--bg-body);
             color: var(--text-main);
             min-height: 100vh;
-            padding: 20px;
+            padding: env(safe-area-inset-top) 20px 20px 20px;
             display: flex; flex-direction: column; align-items: center;
         }
 
         .top-bar {
             width: 100%; max-width: 1200px;
             display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 20px;
+            margin: 20px 0;
         }
 
         .logo { max-width: 90px; filter: drop-shadow(0 0 10px rgba(0,210,255,0.3)); }
@@ -61,53 +57,66 @@
             cursor: pointer; font-size: 1.2rem; color: var(--accent);
             background: var(--card-bg); padding: 12px; border-radius: 50%;
             border: 1px solid var(--border); backdrop-filter: blur(10px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
         header h1 { 
-            font-size: clamp(1.8rem, 5vw, 2.5rem); text-transform: uppercase; 
-            letter-spacing: 3px; text-align: center; margin-bottom: 30px;
-            background: linear-gradient(to right, #fff, var(--accent));
+            font-size: clamp(1.8rem, 5vw, 2.8rem); text-transform: uppercase; 
+            letter-spacing: 3px; font-weight: 800; text-align: center; margin-bottom: 30px;
+            background: linear-gradient(to right, #ffffff, var(--accent));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
         .search-container { width: 100%; max-width: 500px; margin-bottom: 40px; position: relative; }
         #appSearch {
-            width: 100%; padding: 15px 20px 15px 45px; border-radius: 30px;
+            width: 100%; padding: 18px 20px 18px 50px; border-radius: 50px;
             border: 1px solid var(--border); background: var(--search-bg);
             color: var(--text-main); font-size: 1rem; outline: none;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0,0,0,0.2);
         }
-        .search-container i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-dim); }
+        .search-container i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--accent); font-size: 1.2rem; }
 
         .dashboard-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px; width: 100%; max-width: 1200px;
         }
 
-        /* Tarjeta */
+        /* Tarjeta Estilo Tarjeta */
         .card {
-            background: var(--card-bg); backdrop-filter: blur(15px);
-            border: 1px solid var(--border); border-radius: 24px;
-            padding: 30px; text-decoration: none; color: inherit;
+            background: var(--card-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border); border-radius: 28px;
+            padding: 35px 25px; text-decoration: none; color: inherit;
             display: flex; flex-direction: column; align-items: center; text-align: center;
-            cursor: pointer;
+            position: relative; overflow: hidden;
+        }
+
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+            pointer-events: none;
         }
 
         .card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-12px) scale(1.02);
             border-color: var(--accent);
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            background: rgba(255, 255, 255, 0.12);
         }
 
-        .card i { font-size: 3.5rem; margin-bottom: 20px; color: var(--accent); }
-        .card h3 { margin-bottom: 12px; font-size: 1.3rem; font-weight: 600; }
-        .card p { font-size: 0.95rem; color: var(--text-dim); line-height: 1.5; }
+        .card i { 
+            font-size: 3.5rem; margin-bottom: 20px; 
+            color: var(--accent);
+            filter: drop-shadow(0 0 12px rgba(0,210,255,0.4));
+        }
+
+        .card h3 { margin-bottom: 12px; font-size: 1.4rem; font-weight: 700; letter-spacing: 0.5px; }
+        .card p { font-size: 0.95rem; color: var(--text-dim); line-height: 1.6; }
 
         .hidden { display: none; }
 
         @media (max-width: 600px) {
             .dashboard-grid { grid-template-columns: 1fr; }
+            body { padding: 10px; }
         }
     </style>
 </head>
@@ -115,7 +124,7 @@
 
     <div class="top-bar">
         <img src="logo-redes_Transparente-216x216.png" alt="REDES CARRERAS" class="logo">
-        <div class="theme-toggle" onclick="toggleTheme()" title="Cambiar Modo">
+        <div class="theme-toggle" onclick="toggleTheme()">
             <i class="fas fa-moon" id="themeIcon"></i>
         </div>
     </div>
@@ -123,64 +132,63 @@
     <header><h1>Hub Redes Carreras</h1></header>
 
     <div class="search-container">
-        <i class="fas fa-search"></i>
-        <input type="text" id="appSearch" placeholder="Buscar aplicación..." onkeyup="filterApps()">
+        <i class="fas fa-magnifying-glass"></i>
+        <input type="text" id="appSearch" placeholder="¿Qué necesitas gestionar hoy?" onkeyup="filterApps()">
     </div>
 
     <div class="dashboard-grid" id="appsGrid">
         
         <a href="https://redescarreras.github.io/Control-Material/" class="card">
-            <i class="fas fa-truck-ramp-box"></i>
+            <i class="fas fa-truck-fast"></i>
             <h3>Control Albaranes</h3>
-            <p>Envíos, recibidos y control de cables.</p>
+            <p>Gestión de envíos, recibidos y materiales.</p>
         </a>
 
         <a href="https://redescarreras.github.io/Gestor-Facturas-APP/" class="card">
-            <i class="fas fa-file-invoice-dollar"></i>
+            <i class="fas fa-receipt"></i>
             <h3>Gestión de Obras</h3>
-            <p>Control de importes y cobros por obra.</p>
+            <p>Control de facturación e importes pendientes.</p>
         </a>
 
         <a href="https://redescarreras.github.io/Control-Documental/" class="card">
-            <i class="fas fa-certificate"></i>
+            <i class="fas fa-file-shield"></i>
             <h3>Control Documental</h3>
             <p>Vencimientos y certificados de empresa.</p>
         </a>
 
         <a href="https://redescarreras.github.io/Factu-APP/" class="card">
-            <i class="fas fa-chart-line"></i>
+            <i class="fas fa-calculator"></i>
             <h3>Factu APP</h3>
-            <p>IVA, facturas y promedio trimestral.</p>
+            <p>Resumen de facturas, IVA y promedios.</p>
         </a>
 
         <a href="https://redescarreras.github.io/Registro-Horario/" class="card">
-            <i class="fas fa-clock-rotate-left"></i>
+            <i class="fas fa-user-clock"></i>
             <h3>Registro Horario</h3>
-            <p>Firma diaria de jornada laboral.</p>
+            <p>Control de presencia y jornada laboral.</p>
         </a>
 
         <a href="https://redescarreras.github.io/Stock-Material/" class="card">
-            <i class="fas fa-boxes-stacked"></i>
+            <i class="fas fa-warehouse"></i>
             <h3>Stock Material</h3>
-            <p>Control de existencias en nave.</p>
+            <p>Inventario de almacén en tiempo real.</p>
         </a>
 
         <a href="https://redescarreras.github.io/Reporte_fotos_Lyntia/" class="card">
-            <i class="fas fa-camera-retro"></i>
+            <i class="fas fa-images"></i>
             <h3>Reporte Lyntia</h3>
-            <p>Generador de reportes fotográficos.</p>
+            <p>Generación de reportes fotográficos técnicos.</p>
         </a>
 
-        <a href="http://127.0.0.1:3000" target="_blank" class="card">
-            <i class="fas fa-laptop-code"></i>
+        <a href="http://127.0.0.1:3000" class="card">
+            <i class="fas fa-display"></i>
             <h3>Factu Redes (Local)</h3>
-            <p>Sistema de Facturación REDES CARRERAS.</p>
+            <p>Acceso al servidor de facturación local.</p>
         </a>
 
     </div>
 
     <script>
-        // Buscador dinámico
         function filterApps() {
             const input = document.getElementById('appSearch').value.toLowerCase();
             const cards = document.getElementsByClassName('card');
@@ -190,7 +198,6 @@
             });
         }
 
-        // Modo Claro/Oscuro con persistencia
         function toggleTheme() {
             const body = document.body;
             const icon = document.getElementById('themeIcon');
@@ -207,16 +214,10 @@
             }
         }
 
-        // Registro de Service Worker para que el HUB sea PWA
         window.onload = () => {
-            if (localStorage.getItem('theme') === 'light') {
-                document.body.setAttribute('data-theme', 'light');
-                document.getElementById('themeIcon').className = 'fas fa-sun';
-            }
-
+            if (localStorage.getItem('theme') === 'light') toggleTheme();
             if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('./sw.js')
-                .then(() => console.log('HUB PWA Activo'));
+                navigator.serviceWorker.register('./sw.js');
             }
         };
     </script>
