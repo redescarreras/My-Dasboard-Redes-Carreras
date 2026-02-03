@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hub REDES CARRERAS S.L.</title>
+    <title>HUB REDES CARRERAS</title>
     
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#0f172a">
@@ -38,7 +38,7 @@
         * { 
             margin: 0; padding: 0; box-sizing: border-box; 
             font-family: 'Segoe UI', system-ui, sans-serif; 
-            transition: background 0.3s, color 0.3s, transform 0.2s; 
+            transition: all 0.3s ease; 
         }
 
         body {
@@ -55,7 +55,7 @@
             margin-bottom: 20px;
         }
 
-        .logo { max-width: 80px; filter: drop-shadow(0 0 8px rgba(0,210,255,0.2)); }
+        .logo { max-width: 90px; filter: drop-shadow(0 0 10px rgba(0,210,255,0.3)); }
 
         .theme-toggle {
             cursor: pointer; font-size: 1.2rem; color: var(--accent);
@@ -64,9 +64,9 @@
         }
 
         header h1 { 
-            font-size: clamp(1.5rem, 5vw, 2.2rem); text-transform: uppercase; 
-            letter-spacing: 2px; text-align: center; margin-bottom: 30px;
-            background: linear-gradient(to right, var(--text-main), var(--accent));
+            font-size: clamp(1.8rem, 5vw, 2.5rem); text-transform: uppercase; 
+            letter-spacing: 3px; text-align: center; margin-bottom: 30px;
+            background: linear-gradient(to right, #fff, var(--accent));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
@@ -75,6 +75,7 @@
             width: 100%; padding: 15px 20px 15px 45px; border-radius: 30px;
             border: 1px solid var(--border); background: var(--search-bg);
             color: var(--text-main); font-size: 1rem; outline: none;
+            backdrop-filter: blur(5px);
         }
         .search-container i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-dim); }
 
@@ -83,36 +84,43 @@
             gap: 25px; width: 100%; max-width: 1200px;
         }
 
-        /* Tarjetas estilo App */
+        /* Tarjeta */
         .card {
             background: var(--card-bg); backdrop-filter: blur(15px);
             border: 1px solid var(--border); border-radius: 24px;
             padding: 30px; text-decoration: none; color: inherit;
             display: flex; flex-direction: column; align-items: center; text-align: center;
+            cursor: pointer;
         }
 
         .card:hover {
-            transform: translateY(-8px); border-color: var(--accent);
+            transform: translateY(-10px);
+            border-color: var(--accent);
             background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
         }
 
-        .card i { font-size: 3rem; margin-bottom: 20px; color: var(--accent); }
-        .card h3 { margin-bottom: 12px; font-size: 1.2rem; }
-        .card p { font-size: 0.9rem; color: var(--text-dim); line-height: 1.5; }
+        .card i { font-size: 3.5rem; margin-bottom: 20px; color: var(--accent); }
+        .card h3 { margin-bottom: 12px; font-size: 1.3rem; font-weight: 600; }
+        .card p { font-size: 0.95rem; color: var(--text-dim); line-height: 1.5; }
 
         .hidden { display: none; }
+
+        @media (max-width: 600px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
     <div class="top-bar">
         <img src="logo-redes_Transparente-216x216.png" alt="REDES CARRERAS" class="logo">
-        <div class="theme-toggle" onclick="toggleTheme()">
+        <div class="theme-toggle" onclick="toggleTheme()" title="Cambiar Modo">
             <i class="fas fa-moon" id="themeIcon"></i>
         </div>
     </div>
 
-    <header><h1>Redes Carreras Hub</h1></header>
+    <header><h1>Hub Redes Carreras</h1></header>
 
     <div class="search-container">
         <i class="fas fa-search"></i>
@@ -121,57 +129,58 @@
 
     <div class="dashboard-grid" id="appsGrid">
         
-        <a href="https://redescarreras.github.io/Control-Material/" target="_blank" rel="noreferrer" class="card">
-            <i class="fas fa-file-invoice"></i>
-            <h3>Control de Albaranes</h3>
-            <p>Gestión de envíos y control de cable.</p>
+        <a href="https://redescarreras.github.io/Control-Material/" class="card">
+            <i class="fas fa-truck-ramp-box"></i>
+            <h3>Control Albaranes</h3>
+            <p>Envíos, recibidos y control de cables.</p>
         </a>
 
-        <a href="https://redescarreras.github.io/Gestor-Facturas-APP/" target="_blank" rel="noreferrer" class="card">
-            <i class="fas fa-city"></i>
+        <a href="https://redescarreras.github.io/Gestor-Facturas-APP/" class="card">
+            <i class="fas fa-file-invoice-dollar"></i>
             <h3>Gestión de Obras</h3>
-            <p>Importes y facturación por obra.</p>
+            <p>Control de importes y cobros por obra.</p>
         </a>
 
-        <a href="https://redescarreras.github.io/Control-Documental/" target="_blank" rel="noreferrer" class="card">
-            <i class="fas fa-folder-tree"></i>
+        <a href="https://redescarreras.github.io/Control-Documental/" class="card">
+            <i class="fas fa-certificate"></i>
             <h3>Control Documental</h3>
-            <p>Vencimientos y certificados.</p>
+            <p>Vencimientos y certificados de empresa.</p>
         </a>
 
-        <a href="https://redescarreras.github.io/Factu-APP/" target="_blank" rel="noreferrer" class="card">
-            <i class="fas fa-calculator"></i>
+        <a href="https://redescarreras.github.io/Factu-APP/" class="card">
+            <i class="fas fa-chart-line"></i>
             <h3>Factu APP</h3>
-            <p>Compras, ventas y promedio IVA.</p>
+            <p>IVA, facturas y promedio trimestral.</p>
         </a>
 
-        <a href="https://redescarreras.github.io/Registro-Horario/" target="_blank" rel="noreferrer" class="card">
-            <i class="fas fa-user-check"></i>
+        <a href="https://redescarreras.github.io/Registro-Horario/" class="card">
+            <i class="fas fa-clock-rotate-left"></i>
             <h3>Registro Horario</h3>
             <p>Firma diaria de jornada laboral.</p>
         </a>
 
-        <a href="https://redescarreras.github.io/Stock-Material/" target="_blank" rel="noreferrer" class="card">
-            <i class="fas fa-warehouse"></i>
+        <a href="https://redescarreras.github.io/Stock-Material/" class="card">
+            <i class="fas fa-boxes-stacked"></i>
             <h3>Stock Material</h3>
-            <p>Inventario de materiales en nave.</p>
+            <p>Control de existencias en nave.</p>
         </a>
 
-        <a href="https://redescarreras.github.io/Reporte_fotos_Lyntia/" target="_blank" rel="noreferrer" class="card">
-            <i class="fas fa-images"></i>
+        <a href="https://redescarreras.github.io/Reporte_fotos_Lyntia/" class="card">
+            <i class="fas fa-camera-retro"></i>
             <h3>Reporte Lyntia</h3>
-            <p>Generación de informes fotográficos.</p>
+            <p>Generador de reportes fotográficos.</p>
         </a>
 
-        <a href="http://localhost:3000" target="_blank" rel="noreferrer" class="card">
-            <i class="fas fa-file-signature"></i>
+        <a href="http://127.0.0.1:3000" target="_blank" class="card">
+            <i class="fas fa-laptop-code"></i>
             <h3>Factu Redes (Local)</h3>
-            <p>Sistema de facturación en este equipo.</p>
+            <p>Sistema de Facturación REDES CARRERAS.</p>
         </a>
 
     </div>
 
     <script>
+        // Buscador dinámico
         function filterApps() {
             const input = document.getElementById('appSearch').value.toLowerCase();
             const cards = document.getElementsByClassName('card');
@@ -181,10 +190,13 @@
             });
         }
 
+        // Modo Claro/Oscuro con persistencia
         function toggleTheme() {
             const body = document.body;
             const icon = document.getElementById('themeIcon');
-            if (body.getAttribute('data-theme') === 'light') {
+            const isLight = body.getAttribute('data-theme') === 'light';
+            
+            if (isLight) {
                 body.removeAttribute('data-theme');
                 icon.className = 'fas fa-moon';
                 localStorage.setItem('theme', 'dark');
@@ -195,12 +207,16 @@
             }
         }
 
+        // Registro de Service Worker para que el HUB sea PWA
         window.onload = () => {
-            if (localStorage.getItem('theme') === 'light') toggleTheme();
-            
+            if (localStorage.getItem('theme') === 'light') {
+                document.body.setAttribute('data-theme', 'light');
+                document.getElementById('themeIcon').className = 'fas fa-sun';
+            }
+
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('./sw.js')
-                .then(() => console.log('SW registrado para PWA Hub'));
+                .then(() => console.log('HUB PWA Activo'));
             }
         };
     </script>
