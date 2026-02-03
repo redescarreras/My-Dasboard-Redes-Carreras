@@ -1,0 +1,21 @@
+{
+  "short_name": "Hub Redes",
+  "name": "Hub REDES CARRERAS S.L.",
+  "icons": [
+    {
+      "src": "logo-redes_Transparente-216x216.png",
+      "sizes": "216x216",
+      "type": "image/png"
+    },
+    {
+      "src": "logo-redes_Transparente-216x216.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#0f172a",
+  "background_color": "#0f172a"
+}
